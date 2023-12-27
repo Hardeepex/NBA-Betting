@@ -1,6 +1,6 @@
 from datetime import date
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template, render_template
 from functools import lru_cache
 import subprocess
 import re
