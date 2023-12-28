@@ -31,6 +31,7 @@ def createTodaysGames(games, df, odds):
     away_team_days_rest = []
 
     for game in games:
+        # TODO: Add code to insert team's recent performance and injuries.
         home_team = game[0]
         away_team = game[1]
         if home_team not in team_index_current or away_team not in team_index_current:
@@ -112,6 +113,18 @@ def main():
         XGBoost_Runner.xgb_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, args.kc)
         print("-------------------------------------------------------")
     if args.A:
+        predictions = {}
+        # Run and collect XGBoost predictions
+        xgb_predictions, xgb_confidences = XGBoost_Runner.xgb_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, args.kc)
+        predictions['XGBoost'] = {'predictions': xgb_predictions, 'confidences': xgb_confidences}
+        # Normalize data for Neural Network predictions
+        data = tf.keras.utils.normalize(data, axis=1)
+        nn_predictions, nn_confidences = NN_Runner.nn_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, args.kc)
+        predictions['NN'] = {'predictions': nn_predictions, 'confidences': nn_confidences}
+        # TODO: Add logic to compare predictions and choose the one with the higher confidence
+        # TODO: Add code to display the selected predictions
+        print("Chosen Model Predictions:")
+        # TODO: Add logic to print selected predictions with confidence levels
         print("---------------XGBoost Model Predictions---------------")
         XGBoost_Runner.xgb_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, args.kc)
         print("-------------------------------------------------------")

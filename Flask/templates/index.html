@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-    <title>NBA Machine Learning Picks</title>
+    <title>NBA Betting Prediction Bot</title>
     <style>
       .green {color: green}
       .red {color: red}
@@ -16,7 +16,16 @@
   </head>
   <body>
     <main class="container">
-      <h1>NBA Machine Learning Picks ({{today}})</h1>
+      <h1>NBA Betting Prediction Bot ({{today}})</h1>
+      <form action="/predict" method="post">
+        <label for="home_team">Home Team:</label><br>
+        <input type="text" id="home_team" name="home_team"><br>
+        <label for="away_team">Away Team:</label><br>
+        <input type="text" id="away_team" name="away_team"><br>
+        <label for="odds">Odds:</label><br>
+        <input type="text" id="odds" name="odds"><br>
+        <input type="submit" value="Predict">
+      </form>
       <table role="grid">
       <thead>
           <th>Teams</th>
@@ -109,3 +118,6 @@
       </script>
   </body>
 </html>
+    <footer>
+      <p>Copyright &copy; 2022 NBA Betting Prediction Bot. All rights reserved.</p>
+    </footer>
