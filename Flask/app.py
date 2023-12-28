@@ -1,3 +1,4 @@
+import main
 from datetime import date
 import json
 from flask import Flask, render_template
@@ -68,4 +69,5 @@ def index():
     draftkings = fetch_draftkings(ttl_hash=get_ttl_hash())
     betmgm = fetch_betmgm(ttl_hash=get_ttl_hash())
 
-    return render_template('index.html', today=date.today(), data={"fanduel": fanduel, "draftkings": draftkings, "betmgm": betmgm})
+    ai_predictions = main.get_ai_predictions()
+    return render_template('index.html', today=date.today(), data={"fanduel": fanduel, "draftkings": draftkings, "betmgm": betmgm, "ai_predictions": ai_predictions})
